@@ -1,11 +1,25 @@
+import json
+import requests
+
+def get_myip_country(proxies) -> json:
+    ip_get_url = 'http://ip.42.pl/raw'
+    resp = requests.get(ip_get_url, proxies=proxies, timeout=5)
+    my_ip_addr = resp.content.decode('utf-8')
+    resp = requests.get(f'https://ip.taobao.com/outGetIpInfo?ip={my_ip_addr}&accessKey=alibaba-inc', timeout=5)
+    data = resp.json()['data']
+    data['country_name'] = data['country']
+    return data
+
+
 
 def check_proxy(proxies):
     import requests
     proxies_https = proxies['https'] if proxies is not None else '无'
     try:
-        response = requests.get("https://ipapi.co/json/",
-                                proxies=proxies, timeout=4)
-        data = response.json()
+        # response = requests.get("https://ipapi.co/json/",
+        #                         proxies=proxies, timeout=4)
+        # data = response.json()
+        data = get_myip_country(proxies=proxies)
         print(f'查询代理的地理位置，返回的结果是{data}')
         if 'country_name' in data:
             country = data['country_name']
@@ -14,8 +28,8 @@ def check_proxy(proxies):
             result = f"代理配置 {proxies_https}, 代理所在地：未知，IP查询频率受限"
         print(result)
         return result
-    except:
-        result = f"代理配置 {proxies_https}, 代理所在地查询超时，代理可能无效"
+    except Exception as e:
+        result = f"代理配置 {proxies_https}, 代理所在地查询超时，代理可能无效 {e}"
         print(result)
         return result
 
