@@ -163,11 +163,11 @@ def auto_opentab_delay():
     print(f"如果浏览器没有自动打开，请复制并转到以下URL：")
     print(f"\t（亮色主题）: http://localhost:{PORT}")
     print(f"\t（暗色主题）: http://localhost:{PORT}/?__dark-theme=true")
-    def open(): 
-        time.sleep(2)       # 打开浏览器
-        webbrowser.open_new_tab(f"http://localhost:{PORT}/?__dark-theme=true")
+    # def open():
+    #     time.sleep(2)       # 打开浏览器
+    #     webbrowser.open_new_tab(f"http://localhost:{PORT}/?__dark-theme=true")
     threading.Thread(target=open, name="open-browser", daemon=True).start()
     threading.Thread(target=auto_update, name="self-upgrade", daemon=True).start()
 
 auto_opentab_delay()
-demo.queue(concurrency_count=CONCURRENT_COUNT).launch(server_name="0.0.0.0", share=True, server_port=PORT, auth=AUTHENTICATION)
+demo.queue(concurrency_count=CONCURRENT_COUNT).launch(server_name="0.0.0.0", share=False, server_port=PORT, auth=AUTHENTICATION)

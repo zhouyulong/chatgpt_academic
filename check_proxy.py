@@ -11,7 +11,6 @@ def get_myip_country(proxies) -> json:
     return data
 
 
-
 def check_proxy(proxies):
     import requests
     proxies_https = proxies['https'] if proxies is not None else '无'
@@ -23,7 +22,9 @@ def check_proxy(proxies):
         print(f'查询代理的地理位置，返回的结果是{data}')
         if 'country_name' in data:
             country = data['country_name']
-            result = f"代理配置 {proxies_https}, 代理所在地：{country}"
+            region = data['region']
+            city = data['city']
+            result = f"代理配置 {proxies_https}, 代理所在地：{city}, {region}, {country}"
         elif 'error' in data:
             result = f"代理配置 {proxies_https}, 代理所在地：未知，IP查询频率受限"
         print(result)

@@ -68,4 +68,8 @@ def get_core_functions():
             "Prefix":   r"请解释以下代码：" + "\n```\n",
             "Suffix":   "\n```\n",
         },
+        "总结文章": {
+            "Prefix": "请用中文总结下面文章：\n",
+            "Suffix": "",
+        }
     }
