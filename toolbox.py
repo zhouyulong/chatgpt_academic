@@ -437,9 +437,11 @@ def on_report_generated(files, chatbot):
 @lru_cache(maxsize=128)
 def read_single_conf_with_lru_cache(arg):
     try:
-        r = getattr(importlib.import_module('config_private'), arg)
+        r = getattr(importlib.import_module('gpt-volumn-docker.config_private'), arg)
+        print('load config from gpt-volumn-docker.config_private')
     except:
         r = getattr(importlib.import_module('config'), arg)
+        print('load config from config')
     # 在读取API_KEY时，检查一下是不是忘了改config
     if arg == 'API_KEY':
         # 正确的 API_KEY 是 "sk-" + 48 位大小写字母数字的组合

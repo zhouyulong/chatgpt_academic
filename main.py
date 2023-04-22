@@ -21,8 +21,8 @@ import logging
 import time
 date = time.strftime('%y-%m-%d')
 os.makedirs("gpt_log", exist_ok=True)
-try:logging.basicConfig(filename=f"gpt_log/chat_secrets{date}.log", level=logging.INFO, encoding="utf-8")
-except:logging.basicConfig(filename=f"gpt_log/chat_secrets{date}.log", level=logging.INFO)
+try:logging.basicConfig(filename=f"gpt-volumn-docker/logs/chat_secrets{date}.log", level=logging.INFO, encoding="utf-8")
+except:logging.basicConfig(filename=f"gpt-volumn-docker/logs/chat_secrets{date}.log", level=logging.INFO)
 print(f"所有问询记录将自动保存在本地目录./gpt_log/chat_secrets{date}.log, 请注意自我隐私保护哦！")
 
 # 一些普通功能模块
